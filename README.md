@@ -1,3 +1,2 @@
 # EngDados20261SEMESTRE
-Anthony Araujo
-oi
+Lista Pratica de Exercicios 1 - Anthony Araujo
