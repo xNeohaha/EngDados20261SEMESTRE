@@ -25,6 +25,10 @@ def merge_sort(arr):
 
 # se não, #append direita j
 # j sobe um
+# extender para esquerda
+# extender para direita
+
+# retornar resultado
 def merge(esquerda,direita):
     resultado = []
     i = j = 0
