@@ -1,6 +1,7 @@
 
 # Questão 1 
-# Implemente o algoritmo Selection Sort para ordenar uma lista de inteiros em ordem crescente. Exiba a lista antes e depois da ordenação.
+# Implemente o algoritmo Selection Sort para ordenar uma lista de inteiros em ordem crescente. 
+# Exiba a lista antes e depois da ordenação.
 
 def selection_sort(lista):
    n = len(lista)
