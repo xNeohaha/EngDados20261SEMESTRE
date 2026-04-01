@@ -30,6 +30,11 @@ def merge(esquerda,direita):
     resultado.extend(direita[j:])                               
     return resultado
 
+Lista = ["Liberto", "Junior", "Anthony", "Otavio", "Diego"]
+LO = merge_sort(Lista)
+print("Original: ",Lista)
+print("Ordenada: ",LO)
+
 # merge
 # resultado
 # i = j = 0
