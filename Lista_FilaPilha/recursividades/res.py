@@ -1,5 +1,7 @@
 def divide(a,b):
+    print(f"Operação:\n A: {a}\n B: {b}\n")
     if a < b:
+        print(f"Retornou 0")
         return 0
     else:
         return 1 + divide(a - b, b)
