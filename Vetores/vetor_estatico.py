@@ -1,4 +1,4 @@
-import numpy as np
+import Vetores.vetor_estatico as np
 # Criando vetor estático com numpy — dtype fixo, shape controlado
 vetor_np = np.zeros(5, dtype=np.int32) # 5 inteiros de 32 bits
 print(f"Shape: {vetor_np.shape}") # (5,)
