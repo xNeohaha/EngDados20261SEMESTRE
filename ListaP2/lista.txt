@@ -1,0 +1,107 @@
+Aqui estão as respostas curtas e objetivas para todas as 50 questões teóricas de revisão, apresentadas em formato textual corrido. Conforme solicitado, os códigos de implementação específicos foram omitidos e convertidos em explicações conceituais concisas.
+
+---
+
+## Respostas da Lista de Revisão (P2)
+
+**Questão 01:** O caso base é a condição de parada que interrompe as chamadas recursivas, enquanto o passo recursivo é a etapa onde o problema é reduzido e a função invoca a si mesma. Caso o caso base nunca seja alcançado, as chamadas continuam empilhando registros de ativação indefinidamente, estourando o limite da memória e causando o erro de *stack overflow*.
+
+**Questão 02:** O fatorial recursivo reduz o problema a cada passo ($n \times fat(n-1)$) até atingir o caso base $n \le 1$. Sua complexidade de tempo é $O(n)$ porque executa exatamente $n$ chamadas de função, e sua complexidade de espaço também é $O(n)$ devido ao empilhamento de $n$ registros de ativação na memória *stack*.
+
+**Questão 03:** A recursão de cauda ocorre quando a chamada recursiva é a última operação realizada pela função, não restando cálculos pendentes após o retorno. Compiladores otimizados reutilizam o mesmo registro de ativação na pilha para todas as chamadas, transformando a recursão em um laço iterativo e reduzindo o consumo de espaço de $O(n)$ para $O(1)$.
+
+**Questão 04:** A profundidade da recursão delimita o consumo de memória pois determina quantos registros de ativação coexistem na pilha. Para converter um algoritmo recursivo em iterativo, simula-se explicitamente a pilha do sistema utilizando uma estrutura de dados de pilha em memória dinâmica (*heap*), controlando o fluxo e o armazenamento de variáveis por meio de laços de repetição.
+
+**Questão 05:** A implementação ingênua de Fibonacci possui complexidade exponencial $O(2^n)$ porque recalcula repetidamente as mesmas subchamadas para os mesmos valores. A técnica de memorização (*memoization*) altera esse cenário ao salvar os resultados das subchamadas em uma tabela, garantindo que cada estado seja computado apenas uma vez e reduzindo o tempo para linear $O(n)$.
+
+**Questão 06:** Quando a capacidade máxima de um vetor dinâmico é atingida, o sistema aloca um novo bloco de memória contíguo (geralmente com o dobro do tamanho), copia os elementos antigos para este novo espaço e libera a memória anterior. A inserção possui complexidade amortizada $O(1)$ porque o custo linear $O(n)$ do redimensionamento ocorre raramente e é distribuído uniformemente entre as inúmeras inserções de custo constante.
+
+**Questão 07:** A alocação no *Stack* é automática, gerida pelo compilador, oferecendo altíssima velocidade de acesso, mas possui tamanho limitado e ciclo de vida restrito ao escopo da função. A alocação no *Heap* é manual, realizada em tempo de execução, oferecendo flexibilidade de tamanho e controle total do ciclo de vida dos dados, porém possui acesso mais lento e risco de vazamentos se não for explicitamente liberada.
+
+**Questão 08:** Um "ponteiro solto" (*dangling pointer*) é uma variável que armazena o endereço de uma região de memória que já foi desalocada. Ele compromete a integridade do sistema porque, se for acessado ou modificado, pode corromper dados de outras variáveis alocadas naquele mesmo endereço ou causar falhas catastróficas de segmentação.
+
+**Questão 09:** A fragmentação externa espalha pequenos blocos vazios pela memória, impedindo que vetores dinâmicos encontrem um espaço contíguo grande o suficiente para expansão, mesmo que haja memória total disponível. Em sistemas críticos, mitiga-se o problema usando alocadores de memória customizados (como *pool allocators*), compactação de memória ou blocos de tamanho fixo.
+
+**Questão 10:** A sintaxe `lista = [0] * n` aloca de uma só vez um bloco de memória contíguo de tamanho exato para $n$ referências. Em contrapartida, adições sucessivas com `.append()` em um laço provocam múltiplos redimensionamentos e cópias intermediárias conforme a lista cresce, tornando o processo de inicialização mecanicamente mais oneroso.
+
+**Questão 11:** A notação $O(g(n))$ define o limite superior do tempo de execução de um algoritmo para entradas grandes, focando no pior caso. Ignoramos constantes e termos de menor ordem na análise assintótica porque, conforme $n$ cresce ao infinito, o termo de maior ordem domina completamente o comportamento do crescimento do algoritmo, tornando os demais valores irrelevantes.
+
+**Questão 12:** O algoritmo de Busca Linear ilustra essa variação: no melhor caso ($\Omega(1)$), o elemento procurado é o primeiro do vetor; no pior caso ($O(n)$), o elemento está na última posição ou não existe, exigindo que todo o vetor seja percorrido sequencialmente.
+
+**Questão 13:** Sim, podemos afirmar que sua complexidade é $\Theta(n^2)$. Por definição matemática, se uma função possui limite superior $O(f(n))$ e limite inferior $\Omega(f(n))$ para a mesma classe de crescimento, o comportamento assintótico é estrito, caracterizando um limite firme representado por $\Theta(f(n))$.
+
+**Questão 14:** Aplicando o Teorema Mestre à recorrência $T(n) = 2T(n/2) + n$, temos $a=2$, $b=2$ e $f(n)=n$. Como $n^{\log_b a} = n^{\log_2 2} = n^1$, caímos no caso 2 do teorema, resultando na complexidade final $O(n \log n)$. Esta equação descreve o comportamento do famoso algoritmo de ordenação **Merge Sort**.
+
+**Questão 15:** Em uma árvore binária completa de altura $h$, a DFS recursiva consome espaço $O(h)$ devido ao caminho máximo mantido na pilha de execução. Já a BFS consome espaço $O(2^h)$ no pior caso, pois necessita armazenar simultaneamente todos os nós do último nível da árvore na fila de controle.
+
+**Questão 16:** A cada iteração da busca binária, o algoritmo compara o elemento central com o valor alvo e descarta metade do vetor restante, reduzindo o espaço de busca de $n$ para $n/2, n/4, \dots$ até restar $1$ elemento. Matematicamente, o número de divisões necessárias é dado por $n / 2^k = 1$, o que isolando $k$ resulta em $k = \log_2 n$, provando a complexidade $O(\log n)$.
+
+**Questão 17:** O pior caso do Quick Sort ocorre quando o pivô escolhido é repetidamente o maior ou o menor elemento da lista, gerando partições desbalanceadas de tamanho $0$ e $n-1$, o que eleva a complexidade para $O(n^2)$. Para minimizar esse risco, utilizam-se estratégias como a escolha de um pivô aleatório ou a técnica da "mediana de três" elementos.
+
+**Questão 18:** A degeneração ocorre quando elementos são inseridos em ordem de magnitude, transformando a árvore em uma estrutura linear semelhante a uma lista encadeada. Isso destrói a eficiência: o caso médio, que operaria em tempo logarítmico $O(\log n)$, é degradado para um pior caso com complexidade linear $O(n)$ para buscas, inserções e remoções.
+
+**Questão 19:** A rotação dupla à direita é aplicada quando um nó está desbalanceado com fator $+2$ e seu filho à esquerda possui fator de equilíbrio $-1$ (configuração esquerda-direita). O processo consiste em realizar primeiro uma rotação simples à esquerda no filho desbalanceado e, em seguida, uma rotação simples à direita no nó pai desbalanceado.
+
+**Questão 20:** As cinco propriedades são: 1) Todo nó é vermelho ou preto; 2) A raiz é sempre preta; 3) Todas as folhas (NIL) são pretas; 4) Se um nó é vermelho, seus filhos devem ser pretos; 5) Todo caminho de um nó às suas folhas contém o mesmo número de nós pretos. A propriedade do nó vermelho impede o desbalanceamento excessivo porque proíbe dois nós vermelhos consecutivos, limitando a altura máxima a no máximo o dobro da altura preta mínima.
+
+**Questão 21:** A B-Tree armazena múltiplas chaves e filhos por nó, combinando perfeitamente sua estrutura com o tamanho do bloco de leitura do hardware de disco. Isso reduz drasticamente a altura da árvore em comparação com uma AVL, minimizando a quantidade de acessos à memória secundária, que possui uma latência de busca ordens de magnitude maior que a memória RAM.
+
+**Questão 22:** Para remover um nó com dois filhos, localiza-se o seu sucessor em ordem (o nó de menor valor na sua subárvore direita) ou o predecessor em ordem. O valor desse substituto é copiado para o nó que se deseja remover, e o algoritmo realiza uma nova chamada de remoção (agora simples) para deletar o nó sucessor original de sua antiga posição física, reorganizando os ponteiros.
+
+**Questão 23:** O percurso pós-ordem visita sequencialmente a subárvore esquerda, a subárvore direita e apenas por fim o nó raiz. Uma aplicação prática fundamental desse método é a exclusão ou desalocação completa de uma árvore da memória, bem como a avaliação de expressões matemáticas representadas por árvores de expressão, onde os filhos devem ser processados antes de seus pais.
+
+**Questão 24:** Para 15 nós, a altura mínima de uma árvore perfeitamente balanceada é $3$ (níveis de $0$ a $3$) e a altura máxima degenerada é $14$. O balanceamento automático da AVL calcula continuamente os fatores de equilíbrio e dispara rotações mecânicas imediatas toda vez que a diferença de altura entre subárvores ultrapassa o limite $[-1, 1]$, forçando a altura a ficar contida no teto logarítmico e garantindo operações em $O(\log n)$.
+
+**Questão 25:** No pior caso em uma BST com $n$ chaves, a busca por uma string de comprimento $k$ exige $O(k \cdot \log n)$ ou $O(k \cdot n)$ se degenerada, pois cada comparação de nós exige avaliar os caracteres da palavra. Na Trie, a busca depende estritamente do tamanho da chave pesquisada, operando em tempo de pior caso $O(k)$, independentemente da quantidade $n$ de strings salvas na estrutura.
+
+**Questão 26:** O "Caso do Tio Vermelho" ocorre quando um nó recém-inserido (vermelho) possui pai vermelho e o irmão desse pai (o tio) também é vermelho. A correção exige recolorir o pai e o tio para preto, mudar a cor do avô para vermelho e disparar uma checagem recursiva a partir do avô para garantir que nenhuma propriedade superior foi violada.
+
+**Questão 27:** Na Árvore B+, os nós folhas formam uma lista duplamente encadeada horizontal. Isso otimiza consultas de intervalo porque, após localizar o primeiro elemento limite por meio da busca vertical rápida nas chaves, o sistema pode simplesmente navegar sequencialmente pelas folhas vizinhas na horizontal, evitando o reprocessamento e os saltos verticais dispendiosos que ocorrem nas B-Trees tradicionais.
+
+**Questão 28:** Quando um nó apresenta fator de equilíbrio $+2$ e seu filho à direita possui fator $-1$, caracteriza-se um desbalanceamento do tipo Direita-Esquerda. A sequência de correção correta exige a execução de uma **Rotação Simples à Direita** aplicada sobre o nó filho, seguida imediatamente por uma **Rotação Simples à Esquerda** aplicada sobre o nó pai desbalanceado.
+
+**Questão 29:** A representação vetorial dispensa o uso de ponteiros adicionais, otimizando o espaço físico e garantindo excelente localidade de referência na memória cache do processador. Sua limitação crítica surge caso a árvore seja esparsa ou desbalanceada, pois posições vazias no vetor precisam ser preservadas, gerando um desperdício massivo e inaceitável de memória.
+
+**Questão 30:** O algoritmo aproveita a propriedade de ordenação da BST: partindo da raiz, se ambos os nós alvos forem menores que o nó atual, desce-se para o filho esquerdo; se ambos forem maiores, desce-se para o filho direito. O primeiro nó intermediário cujo valor estiver compreendido entre os dois alvos é o LCA, resultando em uma complexidade de tempo de $O(h)$, onde $h$ representa a altura da árvore.
+
+**Questão 31:** Cada nó da Árvore de Segmentos armazena a soma agregada de um intervalo específico do vetor original, dividindo o espaço recursivamente até as folhas. A complexidade para atualizar o valor de um elemento individual é $O(\log n)$ e para consultar a soma acumulada de um intervalo arbitrário qualquer também é $O(\log n)$, pois ambas as operações visitam no máximo uma quantidade fixa de nós por nível da árvore.
+
+**Questão 32:** O *Splaying* traz o elemento acessado para a raiz da árvore através de uma série de rotações dinâmicas estruturadas (operações *Zig*, *Zag*), mudando a forma da árvore a cada busca. Diferente da AVL que busca rigidez e altura mínima matemática, a árvore Splay é ideal para cargas de trabalho com forte localidade temporal (onde dados recentemente acessados têm alta chance de reuso), superando as Rubro-Negras nesses cenários específicos.
+
+**Questão 33:** A Matriz de Adjacência é mais eficiente para verificar a existência de uma aresta entre dois nós específicos, efetuando a checagem em tempo constante $O(1)$. Por outro lado, a Lista de Adjacência economiza substancialmente mais espaço físico em grafos esparsos, consumindo memória proporcional a $O(V + E)$, contra os fixos $O(V^2)$ exigidos pela matriz.
+
+**Questão 34:** A DFS gerencia o fluxo de exploração por meio de uma pilha, empilhando o nó atual enquanto caminha para adjacentes não visitados. O sistema de cores classifica os estados: **branco** indica nó não visitado, **cinza** indica nó em processo de exploração (na pilha) e **preto** indica nó totalmente processado. Se a busca encontra um nó vizinho cinza, confirma-se uma aresta de retorno, identificando matematicamente a presença de um ciclo.
+
+**Questão 35:** A BFS explora o grafo em anéis concêntricos nivelados a partir da origem, garantindo que o primeiro caminho encontrado até qualquer nó seja obrigatoriamente o de menor número de arestas. O controle é feito marcando a distância do nó de origem como zero e, para cada vizinho branco descoberto a partir de um nó $u$, salvando sua distância como a métrica consolidada $dist[u] + 1$.
+
+**Questão 36:** O Dijkstra baseia-se na premissa gananciosa de que, ao fechar um nó com a menor estimativa atual, esse caminho é definitivo. Arestas negativas invalidam essa lógica pois uma rota mais longa pode reduzir seu custo total acumulado tardiamente. Em um grafo com vértices $A, B, C$ e arestas $(A,B)=3$, $(A,C)=5$, e $(B,C)=-4$, o Dijkstra fechará o nó $B$ com custo $3$ e $C$ com custo $5$, ignorando o caminho rebaixado $A \to B \to C$ que custaria apenas $1$.
+
+**Questão 37:** O processo de relaxação compara se o caminho atual para um nó $v$ pode ser reduzido passando por um nó $u$ ($dist[v] > dist[u] + peso(u,v)$). O Bellman-Ford realiza esse teste para todas as arestas $V-1$ vezes. Se na $V$-ésima iteração alguma distância ainda conseguir ser reduzida, o algoritmo comprova que existe um ciclo de peso negativo injetando energia decrescente infinita no sistema.
+
+**Questão 38:** O algoritmo de Prim inicia em um nó arbitrário e expande a árvore geradora de forma gananciosa, adicionando a cada etapa a aresta de menor peso que conecta um vértice já pertencente à árvore a um vértice ainda externo. Essa lógica assemelha-se à do Dijkstra porque ambos utilizam uma fila de prioridades para selecionar continuamente o menor custo de fronteira para atualizar os estados adjacentes.
+
+**Questão 39:** A estrutura Union-Find agrupa os vértices em subconjuntos disjuntos isolados. Durante o processamento das arestas ordenadas por peso no Kruskal, a operação `find` verifica se os dois vértices da aresta já pertencem ao mesmo conjunto; se sim, a aresta é descartada para evitar ciclos. Caso pertençam a conjuntos diferentes, a operação `union` funde os grupos, garantindo altíssima eficiência.
+
+**Questão 40:** A relação de recorrência é dada por $D^{(k)}(i,j) = \min\left(D^{(k-1)}(i,j), D^{(k-1)}(i,k) + D^{(k-1)}(k,j)\right)$. Sua complexidade de tempo é $O(V^3)$ e a de espaço é $O(V^2)$. O algoritmo é preferível para grafos densos porque seu desempenho é independente do número de arestas $E$, superando a execução repetida de outros algoritmos de caminho mínimo.
+
+**Questão 41:** Para componentes conexos, executa-se uma busca (DFS/BFS) a partir de cada nó não visitado, incrementando o contador ao fim de cada ciclo completo de varredura. Para encontrar componentes fortemente conexos em grafos direcionados, o algoritmo deve ser modificado implementando a técnica de Kosaraju ou Tarjan, que utilizam o grafo transposto ou o controle rigoroso de tempos de descoberta com pilhas de execução.
+
+**Questão 42:** A ordenação topológica é gerada inserindo os vértices em uma lista à medida que eles terminam sua exploração na DFS (cor preta), invertendo o resultado final. Essa operação é impossível em grafos com ciclos porque a dependência circular quebra a linearidade exigida, impedindo que um nó venha "antes" de outro que simultaneamente depende dele para fechar o caminho.
+
+**Questão 43:** O Ciclo Euleriano visita todas as arestas do grafo exatamente uma vez, enquanto o Ciclo Hamiltoniano visita todos os vértices do grafo exatamente uma vez. Conforme os teoremas de grafos, um grafo conexo possui um caminho euleriano se, e somente se, possuir exatamente zero ou dois vértices de grau ímpar.
+
+**Questão 44:** A BFS é adaptada colorindo o nó inicial com uma cor (ex: Azul) e inserindo-o na fila. Ao remover um nó da fila, todos os seus vizinhos não visitados recebem a cor oposta (ex: Vermelho) e entram na fila. Se durante a varredura o algoritmo encontrar um vizinho já visitado que possua exatamente a mesma cor do nó atual, o teste falha, confirmando que o grafo não é bipartido.
+
+**Questão 45:** Em grafos esparsos, o algoritmo de Johnson opera em tempo $O(V^2 \log V + VE)$, sendo consideravelmente mais rápido que o limite fixo $O(V^3)$ do Floyd-Warshall. A reponderação roda o Bellman-Ford a partir de um vértice virtual para gerar potenciais $\h(u)$ para cada nó; o novo peso da aresta é definido como $peso'(u,v) = peso(u,v) + h(u) - h(v)$, eliminando os valores negativos sem alterar a estrutura dos caminhos mínimos.
+
+**Questão 46:** A DFS monitora o `tempo de descoberta` de cada nó e o `valor low` (o menor tempo de descoberta alcançável a partir daquela subárvore). Uma aresta $uv$ é classificada como uma ponte se, e somente se, após a exploração completa do nó $v$, o seu valor calculado de retorno mantiver a condição $low[v] > descoberta[u]$, provando que não há caminhos alternativos para acessar o nó de volta.
+
+**Questão 47:** O grafo residual apresenta as capacidades remanescentes e os fluxos reversos disponíveis na rede. O método Edmonds-Karp utiliza a BFS para selecionar invariavelmente o caminho de aumento mais curto em número de arestas. Isso limita o número total de aumentos em termos polinomiais $O(VE^2)$, garantindo a convergência independente do valor numérico das capacidades.
+
+**Questão 48:** Em vez de linhas de código em Python , o processo conceitual com Union-Find extrai os vértices $u$ e $v$ da nova aresta inserida e executa a operação `find` em ambos. Se o resultado apontar para o mesmo ID de conjunto, o ciclo é imediatamente detectado; caso contrário, os conjuntos são unidos via `union`, autorizando a inserção segura.
+
+**Questão 49:** Esses algoritmos agrupam as classes ou módulos com dependências circulares em blocos isolados chamados componentes fortemente conexos. Isso auxilia os engenheiros de software a isolar as dependências problemáticas, permitindo refatorar o código, introduzir abstrações (interfaces) ou redefinir o acoplamento de forma cirúrgica dentro do sistema modular.
+
+**Questão 50:** O algoritmo computa os caminhos mínimos de cada nó para todos os outros e calcula o inverso da soma dessas distâncias. Em grafos ponderados, a escolha recai sobre o algoritmo de Dijkstra implementado com uma fila de prioridades (Min-Heap) executado para cada vértice. O impacto na performance é drástico: o uso do Heap reduz o custo total de tempo de um limite proibitivo de $O(V^3)$ para uma taxa otimizada de $O(V \cdot E \log V)$.
+
+---
